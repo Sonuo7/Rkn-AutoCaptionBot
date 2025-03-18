@@ -26,7 +26,7 @@ class Rkn_Bots(object):
     
     # database config ( required.. 😥)
     DB_NAME = os.environ.get("DB_NAME", "AutoCaption_V05_Bot")     
-    DB_URL = os.environ.get("DB_URL", "mongodb+srv://cedil23970:ZUsIIhxuTSuyARmW@cluster0.s3nek.mongodb.net/")
+    DB_URL = os.environ.get("DB_URL", "mongodb+srv://zbmavw0bui:wF8JxJufyjetX52E@cluster0.of3c2.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
 
     # default caption 
     DEF_CAP = os.environ.get("DEF_CAP", "<b><a href='https//:t.me/Alsamovies'>{file_name} Main Telegram Channel: @Alsamovies</a></b>",

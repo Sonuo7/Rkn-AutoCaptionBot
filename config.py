@@ -25,8 +25,8 @@ class Rkn_Bots(object):
     FORCE_SUB = os.environ.get("FORCE_SUB", "Alsamovies") 
     
     # database config ( required.. 😥)
-    DB_NAME = os.environ.get("DB_NAME", "AutoCaption_V05_Bot")     
-    DB_URL = os.environ.get("DB_URL", "mongodb+srv://zbmavw0bui:wF8JxJufyjetX52E@cluster0.of3c2.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
+    DB_NAME = os.environ.get("DB_NAME", "AutoCaption")     
+    DB_URL = os.environ.get("DB_URL", "mongodb+srv://sonuoj:sonuhij@cluster0.a9dkw.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
 
     # default caption 
     DEF_CAP = os.environ.get("DEF_CAP", "<b><a href='https//:t.me/Alsamovies'>{file_name} Main Telegram Channel: @Alsamovies</a></b>",

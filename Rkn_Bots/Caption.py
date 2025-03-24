@@ -130,7 +130,7 @@ def get_size(size):
         i += 1
         size /= 1024.0
     return "%.2f %s" % (size, units[i])
-
+file_size=get_size(file_size)
 @Client.on_message(filters.channel)
 async def auto_edit_caption(bot, message):
     chnl_id = message.chat.id

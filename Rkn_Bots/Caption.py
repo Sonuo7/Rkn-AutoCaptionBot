@@ -110,7 +110,7 @@ async def delCaption(_, msg):
 
 # Extract Language 
 def extract_language(file_name):
-    language_pattern = r'\b(Hindi|English|Tamil|Bhojpuri|Nepali|Punjabi|Telugu|Malayalam|Kannada|Hin)\b'
+    language_pattern = r'\b(Hindi|English|Tamil|Bhojpuri|Nepali|Punjabi|Telugu|Malayalam|Kannada|Hin|Eng)\b'
     languages = set(re.findall(language_pattern, file_name, re.IGNORECASE))
     if not languages:
         return "Unknown"

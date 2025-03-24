@@ -121,6 +121,16 @@ def extract_year(file_name):
     match = re.search(r'\b(19\d{2}|20\d{2})\b', file_name)
     return match.group(1) if match else None
 	
+# Size conversion function
+def get_size(size):
+    units = ["Bytes", "Kʙ", "Mʙ", "Gʙ", "Tʙ", "Pʙ", "Eʙ"]
+    size = float(size)
+    i = 0
+    while size >= 1024.0 and i < len(units) - 1:  # Changed the condition to stop at the last unit
+        i += 1
+        size /= 1024.0
+    return "%.2f %s" % (size, units[i])
+	file_size=get_size(file_size)
 
 @Client.on_message(filters.channel)
 async def auto_edit_caption(bot, message):

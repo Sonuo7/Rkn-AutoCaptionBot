@@ -123,14 +123,13 @@ def extract_year(file_name):
 	
 # Size conversion function
 def get_size(size):
-    units = ["Bytes", "Kʙ", "Mʙ", "Gʙ", "Tʙ", "Pʙ", "Eʙ"]
+    units = ["Bytes", "KB", "MB", "GB", "TB", "PB", "EB"]
     size = float(size)
     i = 0
-    while size >= 1024.0 and i < len(units) - 1:  # Changed the condition to stop at the last unit
+    while size >= 1024.0 and i < len(units) - 1:
         i += 1
         size /= 1024.0
     return "%.2f %s" % (size, units[i])
-	file_size=get_size(file_size)
 
 @Client.on_message(filters.channel)
 async def auto_edit_caption(bot, message):
@@ -145,22 +144,32 @@ async def auto_edit_caption(bot, message):
                     .replace("_", " ")
                     .replace(".", " ")
                 )
+                file_size = get_size(obj.file_size) if hasattr(obj, "file_size") else "Unknown"
+
                 cap_dets = await chnl_ids.find_one({"chnl_id": chnl_id})
                 caption = message.caption if message.caption else file_name
+
                 try:
                     if cap_dets:
                         cap = cap_dets["caption"]
-                        replaced_caption = cap.format(file_name=file_name, caption=caption, language=extract_language(file_name), year=extract_year(file_name))
+                        replaced_caption = cap.format(
+                            file_name=file_name,
+                            caption=caption,
+                            language=extract_language(file_name),
+                            year=extract_year(file_name),
+                            file_size=file_size
+                        )
                         await message.edit(replaced_caption)
                     else:
-                        replaced_caption = Rkn_Bots.DEF_CAP.format(file_name=file_name, caption=caption, language=extract_language(file_name), year=extract_year(file_name))
+                        replaced_caption = Rkn_Bots.DEF_CAP.format(
+                            file_name=file_name,
+                            caption=caption,
+                            language=extract_language(file_name),
+                            year=extract_year(file_name),
+                            file_size=file_size
+                        )
                         await message.edit(replaced_caption)
                 except FloodWait as e:
                     await asyncio.sleep(e.x)
                     continue
     return
-
-# Rkn Developer 
-# Don't Remove Credit 😔
-# Telegram Channel @RknDeveloper & @Rkn_Botz
-# Developer @RknDeveloperr

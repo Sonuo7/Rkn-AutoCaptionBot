@@ -110,7 +110,7 @@ async def delCaption(_, msg):
 
 # Extract Language 
 def extract_language(file_name):
-    language_pattern = r'\b(Hindi|English|Tamil|Bhojpuri|Nepali|Punjabi|Telugu|Malayalam|Kannada|Hin|Eng)\b'
+    language_pattern = r'\b(Hindi|English|Tamil|Bhojpuri|Nepali|Punjabi|Telugu|Malayalam|Kannada|Korean|Chinese|Hin|Eng|Kor)\b'
     languages = set(re.findall(language_pattern, file_name, re.IGNORECASE))
     if not languages:
         return "Unknown"
@@ -138,7 +138,7 @@ def extract_quality(file_name):
 
 # Extract resolution type like WebRip, WebDL, BluRay, HDRip
 def extract_resolution(file_name):
-    resolutions = ["WEBRip", "WEB-DL", "BluRay", "HDRip", "HDTV", "DVDRip", "CAMRip", "TS", "SDTV"]
+    resolutions = ["WEBRip", "WEB-Rip", "WEB DL", "WEB-DL", "BluRay", "HDRip", "HDTV", "DVDRip", "CAMRip", "TS", "SDTV"]
     for res in resolutions:
         if res.lower() in file_name.lower():
             return res

@@ -121,7 +121,7 @@ def extract_year(file_name):
     match = re.search(r'\b(19\d{2}|20\d{2})\b', file_name)
     return match.group(1) if match else None
 	
-    # Size conversion function
+# Size conversion function
 def get_size(size):
     units = ["Bytes", "KB", "MB", "GB", "TB", "PB", "EB"]
     size = float(size)
@@ -173,8 +173,8 @@ async def auto_edit_caption(bot, message):
                             language=extract_language(file_name),
                             year=extract_year(file_name),
                             file_size=file_size,
-                            Quality=quality,
-                            Resolution=resolution
+                            quality=quality,  # Fixed lowercase key
+                            resolution=resolution  # Fixed lowercase key
                         )
                         await message.edit(replaced_caption)
                     else:
@@ -184,8 +184,8 @@ async def auto_edit_caption(bot, message):
                             language=extract_language(file_name),
                             year=extract_year(file_name),
                             file_size=file_size,
-                            Quality=quality,
-                            Resolution=resolution
+                            quality=quality,  # Fixed lowercase key
+                            resolution=resolution  # Fixed lowercase key
                         )
                         await message.edit(replaced_caption)
                 except FloodWait as e:

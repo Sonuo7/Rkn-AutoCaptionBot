@@ -121,7 +121,7 @@ def extract_year(file_name):
     match = re.search(r'\b(19\d{2}|20\d{2})\b', file_name)
     return match.group(1) if match else None
 	
-# Size conversion function
+    # Size conversion function
 def get_size(size):
     units = ["Bytes", "KB", "MB", "GB", "TB", "PB", "EB"]
     size = float(size)
@@ -130,6 +130,19 @@ def get_size(size):
         i += 1
         size /= 1024.0
     return "%.2f %s" % (size, units[i])
+
+# Extract quality like 480p, 720p, 1080p, 2160p
+def extract_quality(file_name):
+    match = re.search(r"(\d{3,4}p)", file_name)
+    return match.group(1) if match else "Unknown"
+
+# Extract resolution type like WebRip, WebDL, BluRay, HDRip
+def extract_resolution(file_name):
+    resolutions = ["WEBRip", "WEB-DL", "BluRay", "HDRip", "HDTV", "DVDRip", "CAMRip", "TS", "SDTV"]
+    for res in resolutions:
+        if res.lower() in file_name.lower():
+            return res
+    return "Unknown"
 
 @Client.on_message(filters.channel)
 async def auto_edit_caption(bot, message):
@@ -145,6 +158,8 @@ async def auto_edit_caption(bot, message):
                     .replace(".", " ")
                 )
                 file_size = get_size(obj.file_size) if hasattr(obj, "file_size") else "Unknown"
+                quality = extract_quality(file_name)
+                resolution = extract_resolution(file_name)
 
                 cap_dets = await chnl_ids.find_one({"chnl_id": chnl_id})
                 caption = message.caption if message.caption else file_name
@@ -157,7 +172,9 @@ async def auto_edit_caption(bot, message):
                             caption=caption,
                             language=extract_language(file_name),
                             year=extract_year(file_name),
-                            file_size=file_size
+                            file_size=file_size,
+                            Quality=quality,
+                            Resolution=resolution
                         )
                         await message.edit(replaced_caption)
                     else:
@@ -166,7 +183,9 @@ async def auto_edit_caption(bot, message):
                             caption=caption,
                             language=extract_language(file_name),
                             year=extract_year(file_name),
-                            file_size=file_size
+                            file_size=file_size,
+                            Quality=quality,
+                            Resolution=resolution
                         )
                         await message.edit(replaced_caption)
                 except FloodWait as e:

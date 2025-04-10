@@ -12,7 +12,7 @@ db = client[Rkn_Bots.DB_NAME]
 chnl_ids = db.chnl_ids
 users = db.users
 
-#insert user data
+# Insert user data
 async def insert(user_id):
     user_det = {"_id": user_id}
     try:
@@ -31,7 +31,8 @@ async def getid():
 
 async def delete(id):
     await users.delete_one(id)
-                     
+
+# Caption functions
 async def addCap(chnl_id, caption):
     dets = {"chnl_id": chnl_id, "caption": caption}
     await chnl_ids.insert_one(dets)
@@ -39,7 +40,17 @@ async def addCap(chnl_id, caption):
 async def updateCap(chnl_id, caption):
     await chnl_ids.update_one({"chnl_id": chnl_id}, {"$set": {"caption": caption}})
 
-# Rkn Developer 
-# Don't Remove Credit 😔
-# Telegram Channel @RknDeveloper & @Rkn_Bots
-# Developer @RknDeveloperr
+# Remove Words functions
+async def update_remove_words(chnl_id, words):
+    await chnl_ids.update_one(
+        {"chnl_id": chnl_id},
+        {"$set": {"remove_words": words}},
+        upsert=True
+    )
+
+async def get_remove_words(chnl_id):
+    doc = await chnl_ids.find_one({"chnl_id": chnl_id})
+    return doc.get("remove_words", []) if doc else []
+
+async def clear_remove_words(chnl_id):
+    await chnl_ids.update_one({"chnl_id": chnl_id}, {"$unset": {"remove_words": ""}})

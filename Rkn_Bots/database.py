@@ -1,8 +1,5 @@
 # (c) @RknDeveloperr
-# Rkn Developer 
-# Don't Remove Credit 😔
 # Telegram Channel @RknDeveloper & @Rkn_Bots
-# Developer @RknDeveloperr
 
 import motor.motor_asyncio
 from config import Rkn_Bots
@@ -14,28 +11,24 @@ users = db.users
 
 # Insert user data
 async def insert(user_id):
-    user_det = {"_id": user_id}
     try:
-        await users.insert_one(user_det)
+        await users.insert_one({"_id": user_id})
     except:
         pass
-        
+
 # Total User
 async def total_user():
-    user = await users.count_documents({})
-    return user
+    return await users.count_documents({})
 
 async def getid():
-    all_users = users.find({})
-    return all_users
+    return users.find({})
 
 async def delete(id):
     await users.delete_one(id)
 
 # Caption functions
 async def addCap(chnl_id, caption):
-    dets = {"chnl_id": chnl_id, "caption": caption}
-    await chnl_ids.insert_one(dets)
+    await chnl_ids.insert_one({"chnl_id": chnl_id, "caption": caption})
 
 async def updateCap(chnl_id, caption):
     await chnl_ids.update_one({"chnl_id": chnl_id}, {"$set": {"caption": caption}})
@@ -54,3 +47,4 @@ async def get_remove_words(chnl_id):
 
 async def clear_remove_words(chnl_id):
     await chnl_ids.update_one({"chnl_id": chnl_id}, {"$unset": {"remove_words": ""}})
+    

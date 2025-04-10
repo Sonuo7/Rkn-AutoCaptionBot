@@ -144,6 +144,34 @@ def extract_resolution(file_name):
             return res
     return "Unknown"
 
+# Remove word helper
+def remove_words(text, word_list):
+    for word in word_list:
+        text = re.sub(rf'\b{re.escape(word)}\b', '', text, flags=re.IGNORECASE)
+    return ' '.join(text.split())
+
+# /remove_word command
+@Client.on_message(filters.command("remove_word") & filters.channel)
+async def set_remove_words(bot, message):
+    from database import update_remove_words
+    chnl_id = message.chat.id
+    words = message.text.split(None, 1)
+    if len(words) < 2:
+        await message.reply("Words toh bhej bhai, comma se alag kar ke.")
+        return
+    word_list = [w.strip().lower() for w in words[1].split(",") if w.strip()]
+    await update_remove_words(chnl_id, word_list)
+    await message.reply(f"Ye words ab remove honge: {', '.join(word_list)}")
+
+# /rmw_off command
+@Client.on_message(filters.command("rmw_off") & filters.channel)
+async def remove_words_off(bot, message):
+    from database import clear_remove_words
+    chnl_id = message.chat.id
+    await clear_remove_words(chnl_id)
+    await message.reply("Word removal disable kar diya.")
+
+# Auto-edit caption
 @Client.on_message(filters.channel)
 async def auto_edit_caption(bot, message):
     chnl_id = message.chat.id
@@ -164,6 +192,11 @@ async def auto_edit_caption(bot, message):
                 cap_dets = await chnl_ids.find_one({"chnl_id": chnl_id})
                 caption = message.caption if message.caption else file_name
 
+                # Word removal
+                remove_list = await get_remove_words(chnl_id)
+                file_name = remove_words(file_name, remove_list)
+                caption = remove_words(caption, remove_list)
+
                 try:
                     if cap_dets:
                         cap = cap_dets["caption"]
@@ -173,8 +206,8 @@ async def auto_edit_caption(bot, message):
                             language=extract_language(file_name),
                             year=extract_year(file_name),
                             file_size=file_size,
-                            quality=quality,  # Fixed lowercase key
-                            resolution=resolution  # Fixed lowercase key
+                            quality=quality,
+                            resolution=resolution
                         )
                         await message.edit(replaced_caption)
                     else:
@@ -184,11 +217,11 @@ async def auto_edit_caption(bot, message):
                             language=extract_language(file_name),
                             year=extract_year(file_name),
                             file_size=file_size,
-                            quality=quality,  # Fixed lowercase key
-                            resolution=resolution  # Fixed lowercase key
+                            quality=quality,
+                            resolution=resolution
                         )
                         await message.edit(replaced_caption)
                 except FloodWait as e:
-                    await asyncio.sleep(e.x)
+                    await  await asyncio.sleep(e.x)
                     continue
     return

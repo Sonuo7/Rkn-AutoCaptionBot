@@ -222,6 +222,6 @@ async def auto_edit_caption(bot, message):
                         )
                         await message.edit(replaced_caption)
                 except FloodWait as e:
-                    await  asyncio.sleep(e.x)
+                    await asyncio.sleep(e.x)
                     continue
     return

@@ -1,4 +1,10 @@
 pyrofork
 tgcrypto
 motor
+pytz
+Flask
 aiohttp
+gunicorn
+Jinja2
+werkzeug
+itsdangerous

@@ -18,9 +18,9 @@ import time
 
 class Rkn_Botz(object):
     # Rkn client config (required)
-    API_ID = os.environ.get("API_ID", "")
-    API_HASH = os.environ.get("API_HASH", "")
-    BOT_TOKEN = os.environ.get("BOT_TOKEN", "")
+    API_ID = os.environ.get("API_ID", "28137469")
+    API_HASH = os.environ.get("API_HASH", "3b33568aa7119719d1f37cb15b3ae587")
+    BOT_TOKEN = os.environ.get("BOT_TOKEN", "7838294802:AAFJXUyRRKqhmR24j9NmRvYVudMD-ChQcw4")
 
     # Start pic (default image link)
     RKN_PIC = os.environ.get("RKN_PIC", "https://telegra.ph/file/21a8e96b45cd6ac4d3da6.jpg")
@@ -32,16 +32,16 @@ class Rkn_Botz(object):
     PORT = int(os.environ.get("PORT", "8080"))
 
     # Force subscribe channel username (without @) (only public chats username required)
-    FORCE_SUB = os.environ.get("FORCE_SUB", "Rkn_Botz")
+    FORCE_SUB = os.environ.get("FORCE_SUB", "Alsamovies")
 
     # Database config (required)
     DB_NAME = os.environ.get("DB_NAME", "AutoCaption_V05_Bot")
-    DB_URL = os.environ.get("DB_URL", "")
+    DB_URL = os.environ.get("DB_URL", "mongodb+srv://rockysingh1234ops:zlrrY3AvCxbkbmTz@cluster0.the0v.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
 
     # Default caption (with safe fallback)
     DEFAULT_CAPTION = os.environ.get(
         "DEFAULT_CAPTION",
-        "<b><a href='https://t.me/Rkn_Botz'>{file_name} Main Telegram Channel: @Rkn_Bots_Updates</a></b>"
+        "<b><a href='https://t.me/Alsamovies'>{file_name} Main Telegram Channel: @Alsamovies</a></b>"
     )
 
     # Sticker ID default
@@ -51,7 +51,7 @@ class Rkn_Botz(object):
     )
 
     # Admin ID (single integer)
-    ADMIN = int(os.environ.get('ADMIN', '5960922591'))  # Yahan default ko apne Telegram User ID se replace karo
+    ADMIN = int(os.environ.get('ADMIN', '897584437'))  # Yahan default ko apne Telegram User ID se replace karo
 
 # ————
 # End of file
@@ -63,5 +63,6 @@ class Rkn_Botz(object):
 # Updates Channel: @Rkn_Bots_Updates & @Rkn_Botz
 # Special Thanks To: @ReshamOwner
 # Update Channels: @Digital_Botz & @DigitalBotz_Support
+
 
 # ⚠️ Please do not remove this credit!

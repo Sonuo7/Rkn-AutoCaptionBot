@@ -63,4 +63,5 @@ class Bot(Client):
         await super().stop()
         print(f"{me.first_name} Bot stopped.")
 
-Bot().run()t!
+Bot().run()
+

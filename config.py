@@ -36,7 +36,7 @@ class Rkn_Botz(object):
 
     # Database config (required)
     DB_NAME = os.environ.get("DB_NAME", "AutoCaption_V05_Bot")
-    DB_URL = os.environ.get("DB_URL", "mongodb+srv://rockysingh1234ops:zlrrY3AvCxbkbmTz@cluster0.the0v.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
+    DB_URL = os.environ.get("DB_URL", "mongodb+srv://sonuoj:sonuhij@cluster0.a9dkw.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
 
     # Default caption (with safe fallback)
     DEFAULT_CAPTION = os.environ.get(
@@ -66,3 +66,4 @@ class Rkn_Botz(object):
 
 
 # ⚠️ Please do not remove this credit!
+
